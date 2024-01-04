@@ -105,30 +105,31 @@ This type includes the following instruction formats. The opcode is used to dist
 ### S-Type (Stack)
 
 #### Push One
-| Opcode | Rd   | 
-|--------|------|
-| 6 bits | 4 bits|
+| Opcode | Rd | Rs1  | Unused  |
+|--------|-------------|--------------|------------------|
+| 6 bits| 4 bits        | 4 bits        | 18 bits        |
+
 
 - `push.1 Rd`: Push one. Push the value of `Rd` on the top of the stack.
 
 #### Push Many
-| Opcode | Rd   | Rs1  |
-|--------|------|------|
-| 6 bits | 4 bits | 14 bits |
+| Opcode | Rd | Rs1  | Unused  |
+|--------|-------------|--------------|------------------|
+| 6 bits| 4 bits        | 4 bits        | 18 bits        |
 
 - `push.m Rd, Rs1`: Push many. Push the values of the registers in the range `Rd` to `Rs1` in order on the top of the stack.
 
 #### Pop One
-| Opcode | Rd   |
-|--------|------|
-| 6 bits | 4 bits|
+| Opcode | Rd | Rs1  | Unused  |
+|--------|-------------|--------------|------------------|
+| 6 bits| 4 bits        | 4 bits        | 18 bits        |
 
 - `pop.1 Rd`: Pop one. Pop the stack and store the topmost element in `Rd`.
 
 #### Pop Many
-| Opcode | Rd   | Rs1  |
-|--------|------|------|
-| 6 bits | 4 bits | 14 bits |
+| Opcode | Rd | Rs1  | Unused  |
+|--------|-------------|--------------|------------------|
+| 6 bits| 4 bits        | 4 bits        | 18 bits        |
 
 - `pop.m Rd, Rs1`: Pop many. Pop the top `(Rs1 – Rd) + 1` elements from the stack, and store the values of these elements in the registers from `Rd` to `Rs1`.
   - The topmost element is stored in `Rd`, and so on.
