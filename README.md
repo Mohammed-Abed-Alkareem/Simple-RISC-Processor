@@ -159,8 +159,8 @@ For simplicity, you are required to implement a subset only of this processor’
 | JMP   | Next PC = {PC[31:26], Immediate26} | 001111       | J-Type            |
 | CALL  | Next PC = {PC[31:26], Immediate26}<br>PC + 4 is pushed on the stack | 010000 | J-Type |
 | RET   | Next PC = top of the stack        | 010001       | J-Type            |
-| JR    | Next PC = Reg[Rs1]                 | 010010       | J-Type            |
-| CALL.R| Next PC = Reg[Rs1]<br>PC + 4 is pushed on the stack | 010011 | J-Type |
+| JR    | Next PC = Reg[Rd]                 | 010010       | J-Type            |
+| CALL.R| Next PC = Reg[Rd]<br>PC + 4 is pushed on the stack | 010011 | J-Type |
 | PUSH.1| Rd is pushed on the top of the stack | 010100      | S-Type            |
 | PUSH.M| Registers in the range Rd to Rs1 are pushed on the stack | 010101 | S-Type |
 | POP.1 | The top element of the stack is popped, and it is stored in the Rd register | 010110 | S-Type |
