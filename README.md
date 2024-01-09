@@ -119,24 +119,18 @@ For simplicity, you are required to implement a subset only of this processor’
 | AND   | `Reg(Rd) = Reg(Rs1) & Reg(Rs2)`   | 000000       | R-Type            |
 | ADD   | `Reg(Rd) = Reg(Rs1) + Reg(Rs2)`   | 000001       | R-Type            |
 | SUB   | `Reg(Rd) = Reg(Rs1) - Reg(Rs2)`   | 000010       | R-Type            |
-
 | ANDI  | `Reg(Rd) = Reg(Rs1) & Imm16`      | 000011       | I-Type            |
 | ADDI  | `Reg(Rd) = Reg(Rs1) + Imm16`      | 000100       | I-Type            |
 | LW    | `Reg(Rd) = Mem(Reg(Rs1) + Imm16)` | 000101       | I-Type            |
-
 | LW.POI| `Reg(Rd) = Mem(Reg(Rs1) + Imm16)`<br>`Reg[Rs1] = Reg[Rs1] + 4` | 000110 | I-Type |
-
 | SW    | `Mem(Reg(Rs1) + Imm16) = Reg(Rd)` | 000111       | I-Type            |
-
 | BGT   | If (Reg(Rd) > Reg(Rs1))<br>Next PC = PC + sign_extended(Imm16)<br>Else PC = PC + 4 | 001000 | I-Type |
 | BLT   | If (Reg(Rd) < Reg(Rs1))<br>Next PC = PC + sign_extended(Imm16)<br>Else PC = PC + 4 | 001001 | I-Type |
 | BEQ   | If (Reg(Rd) == Reg(Rs1))<br>Next PC = PC + sign_extended(Imm16)<br>Else PC = PC + 4 | 001010 | I-Type |
 | BNE   | If (Reg(Rd) != Reg(Rs1))<br>Next PC = PC + sign_extended(Imm16)<br>Else PC = PC + 4 | 001011 | I-Type |
-
 | JMP   | Next PC = {PC[31:26], Immediate26} | 001100       | J-Type            |
 | CALL  | Next PC = {PC[31:26], Immediate26}<br>PC + 4 is pushed on the stack | 001101 | J-Type |
 | RET   | Next PC = top of the stack        | 001110       | J-Type            |
-
 | PUSH.1| Rd is pushed on the top of the stack | 001111     | S-Type            |
 | POP.1 | The top element of the stack is popped, and it is stored in the Rd register | 100000 | S-Type |
 
