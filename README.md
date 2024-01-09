@@ -15,10 +15,11 @@ design and verify a simple multi cycle RISC processor in Verilog
 - **Stack Segment**
 
     The stack segment is a Last In First Out (LIFO) data structure. The machine has explicit instructions that enable the programmer to push/pop elements on/from the stack. The stack stores the return address, registers’ values upon function calls, etc.
-6. Four instruction types (R-type, I-type, J-type, and S-type).
-7. Separate data and instructions memories
-8. Byte addressable memory
-9. Big endian byte ordering
+
+6. The processor has two separate physical memories, one for instructions and the other one for data. The data memory stores both the static data segment and the stack segment.
+7. Four instruction types (R-type, I-type, J-type, and S-type).
+8. Separate data and instructions memories
+9. Word-addressable memory
 10. You need to generate the required signals from the ALU to calculate the condition branch outcome (taken/ not taken). These signals might include zero, carry, overflow, etc.
 
 ## Instruction Types and Formats
