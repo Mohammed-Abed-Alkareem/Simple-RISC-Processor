@@ -50,16 +50,15 @@ As mentioned above, this ISA has four instruction formats: R-type, I-type, J-typ
 - 2-bit `Mode`: used with load/store instructions only
   - 00: no increment/decrement of the base register
   - 01: post-increment the base register
-  - 10: pre-increment the base register
-  - 11: post-decrement the base register
+  - 10-11: unused
 
 
 | Mode Value | Action                                |
 |------------|---------------------------------------|
 | 00         | `lw Rd, imm(Rs1)` # No inc/dec of the base register                   |
-| 01         | `LW.PRI Rd, imm(Rs1)`  # load word pre-increment <br>     Before the address is sent to the memory, the base register is incremented <br> Reg[Rs1] = Reg[Rs1] + 4  <br>   It is incremented by four because lw loads one word and the word size is 4 bytes     |
 | 01         | `LW.POI Rd, imm (Rs1)`  # load word pre-increment  # load word post-increment <br> After the address is sent to the memory, the base register is incremented  <br>   Reg[Rs1] = Reg[Rs1] + 4 |     
-| 11         | `LW.POD Rd, imm (Rs1)`  # load word post-decrement <br>    After the address is sent to the memory, the base register is decremented <br>Reg[Rs1] = Reg[Rs1] - 4     |
+| 10         | Unused  |
+| 11         | Unused  |
 
 
 ### J-Type (Jump Type)
@@ -89,19 +88,6 @@ This type includes the following instruction formats. The opcode is used to dist
 - `ret`: Return from a function.
   - The next PC will be the top element of the stack.
 
-#### Jump to Address in Register
-| Opcode | Rd   | Unused |
-|--------|------|--------|
-| 6 bits | 4 bits | 22 bits |
-
-- `jr Rd`: Jump to the target address stored in the register `Rd`.
-
-#### Call Function from Register
-| Opcode | Rd   | Unused |
-|--------|------|--------|
-| 6 bits | 4 bits | 22 bits |
-
-- `call.r Rd`: Call the function whose address is stored in the register `Rd`.
 
 ### S-Type (Stack)
 
@@ -113,12 +99,6 @@ This type includes the following instruction formats. The opcode is used to dist
 
 - `push.1 Rd`: Push one. Push the value of `Rd` on the top of the stack.
 
-#### Push Many
-| Opcode | Rd | Rs1  | Unused  |
-|--------|-------------|--------------|------------------|
-| 6 bits| 4 bits        | 4 bits        | 18 bits        |
-
-- `push.m Rd, Rs1`: Push many. Push the values of the registers in the range `Rd` to `Rs1` in order on the top of the stack.
 
 #### Pop One
 | Opcode | Rd | Rs1  | Unused  |
@@ -127,13 +107,7 @@ This type includes the following instruction formats. The opcode is used to dist
 
 - `pop.1 Rd`: Pop one. Pop the stack and store the topmost element in `Rd`.
 
-#### Pop Many
-| Opcode | Rd | Rs1  | Unused  |
-|--------|-------------|--------------|------------------|
-| 6 bits| 4 bits        | 4 bits        | 18 bits        |
 
-- `pop.m Rd, Rs1`: Pop many. Pop the top `(Rs1 – Rd) + 1` elements from the stack, and store the values of these elements in the registers from `Rd` to `Rs1`.
-  - The topmost element is stored in `Rd`, and so on.
 
 ## Instructions’ Encoding
 For simplicity, you are required to implement a subset only of this processor’s ISA. The table below shows the different instructions you are required to implement. It shows their type, the opcode value, and their meaning in RTN (Register Transfer Notation). Although the instruction set is reduced, it is still rich enough to write useful programs.
