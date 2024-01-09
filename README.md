@@ -137,9 +137,7 @@ For simplicity, you are required to implement a subset only of this processor’
 | JR    | Next PC = Reg[Rd]                 | 010010       | J-Type            |
 | CALL.R| Next PC = Reg[Rd]<br>PC + 4 is pushed on the stack | 010011 | J-Type |
 | PUSH.1| Rd is pushed on the top of the stack | 010100      | S-Type            |
-| PUSH.M| Registers in the range Rd to Rs1 are pushed on the stack | 010101 | S-Type |
 | POP.1 | The top element of the stack is popped, and it is stored in the Rd register | 010110 | S-Type |
-| POP.M | Pop the top (Rs1 – Rd) + 1 elements from the stack,<br>and store the values of these elements in the registers from Rd to Rs1.<br>The topmost element is stored in Rd, and so on. | 010111 | S-Type |
 
 
 ## Data Path
