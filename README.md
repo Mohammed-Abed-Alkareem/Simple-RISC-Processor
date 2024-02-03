@@ -56,7 +56,7 @@ As mentioned above, this ISA has four instruction formats: R-type, I-type, J-typ
 | Mode Value | Action                                |
 |------------|---------------------------------------|
 | 00         | `lw Rd, imm(Rs1)` # No inc/dec of the base register                   |
-| 01         | `LW.POI Rd, imm (Rs1)`  # load word pre-increment  # load word post-increment <br> After the address is sent to the memory, the base register is incremented  <br>   Reg[Rs1] = Reg[Rs1] + 4 |     
+| 01         | `LW.POI Rd, imm (Rs1)`  # load word pre-increment  # load word post-increment <br> After the address is sent to the memory, the base register is incremented  <br>   Reg[Rs1] = Reg[Rs1] + 1 |     
 | 10         | Unused  |
 | 11         | Unused  |
 
@@ -227,13 +227,14 @@ For simplicity, you are required to implement a subset only of this processor’
 ### Data memory
 
 - [data_memory.v](./processor_modules/RiscProcessor/processor/src/data_memory/data_memory.v)
-  a 32 bit data memory with 256 words
+  a 32 bit data memory with 256 words (last 32 word are used as stack)
 
 - [data_memory_tb.v](./processor_modules/RiscProcessor/processor/src/data_memory/data_memory_testbench.v)
   test bench for the data memory module
 
 - waveform
   ![data memory waveform](./assets/data_memory_waveform.png)
+![data memory stack waveform](./assets/data_memory_waveform.png)
 
 ### ALU
 
