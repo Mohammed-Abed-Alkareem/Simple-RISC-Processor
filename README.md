@@ -136,6 +136,70 @@ For simplicity, you are required to implement a subset only of this processor’
 
 
 ## Data Path
+![Data Path](/pictures/datapath.png)
+
+## Finite State Machine
+![Data Path](/pictures/State Diagram.png)
+
+| Signal Name    | Signal Description                                           | Cases                              |
+| --------------- | ------------------------------------------------------------ | ----------------------------------- |
+| PC src          | Determines the next value of the PC                           | 0: Pc = Pc + 1<br/>1: PC = {PC[31:26], Immediate26 }<br/>2: PC = PC + sign_extended (Imm16)<br/>3: PC = top of the stack |
+| Dst Reg         | Determines on which register to write                         | 0: RW = Rs1<br/>1: RW = Rd         |
+| RB              | Determines the second register                                | 0: RB = Rs2<br/>1: RB = Rd         |
+| En W            | Enable / disable the write on the registers                   | 0: write disabled<br/>1: write enabled |
+| Write value     | Determines the value to be written on the register             | 0: write the value from stage 4 incremented by 1<br/>1: write the value from stage 5 |
+| ALU src         | Determines the first input of the ALU                         | 0: B = Immediate<br/>1: B = BusB   |
+| ALU op          | Determine the operation for the ALU                           | 0: AND<br/>1: ADD<br/>2: SUB        |
+| Mem R           | Enable read from memory                                       | 0: disable<br/>1: enable            |
+| Mem W           | Enable write to memory                                        | 0: disable<br/>1: enable            |
+| WB              | Determine the return value from stage 5                       | 0: data from ALU<br/>1: data from memory |
+| ext             | Determine logical or signed extension                         | 0: logical extension<br/>1: signed extension |
+| new sp          | Determines the new value of the stack pointer                  | 0: same as it is<br/>1: decremented by 1<br/>2: incremented by 1 |
+| stack/mem       | Determines if the address for the data to be stored in the memory or pushed in the stack | 0: calculated address of the memory<br/>1: stack pointer |
+| address/data    | Determines if the data stored in the memory from the registerfile or the pc+1 | 0: data from register file<br/>1: pc +1 |
+
+
+### Signals
+#### R-Type Instructions
+| OPCODE | PC src | Dst Reg | RB | En W | Write value | ALU src | ALU op | Mem R | Mem W | WB | ext | new sp | stack/mem | address/data |
+| ------ | ------ | ------- | -- | ---- | ----------- | ------- | ------ | ----- | ----- | -- | --- | ------ | --------- | ------------ |
+| AND    | 0      | 1       | 0  | 1    | 1           | 0       | 0      | 0     | 0     | x  | 0   | x      | x         | x            |
+| ADD    | 0      | 1       | 0  | 1    | 1           | 1       | 0      | 0     | 0     | x  | 0   | x      | x         | x            |
+| SUB    | 0      | 1       | 0  | 1    | 1           | 2       | 0      | 0     | 0     | x  | 0   | x      | x         | x            |
+
+#### I-Type Instructions
+
+| OPCODE | PC src | Dst Reg | RB | En W | Write value | ALU src | ALU op | Mem R | Mem W | WB | ext | new sp | stack/mem | address/data |
+| ------ | ------ | ------- | -- | ---- | ----------- | ------- | ------ | ----- | ----- | -- | --- | ------ | --------- | ------------ |
+| ANDI   | 0      | 1       | x  | 1    | 0           | 0       | 0      | 0     | 0     | 0  | 0   | x      | x         | x            |
+| ADDI   | 0      | 1       | x  | 1    | 0           | 1       | 0      | 0     | 0     | 1  | 0   | x      | x         | x            |
+| LW     | 0      | 1       | x  | 1    | 0           | 1       | 1      | 1     | 0     | 1  | 0   | x      | 0         | 0            |
+| LW.POI | 0      | St2:0   | St5:1 | 1 | St2:0       | St5:1   | 0      | 1     | 1     | 0  | 1   | 0      | 1         | 1            |
+| SW     | 0      | x       | 1  | 0    | 1           | 0       | 1      | 0     | 1     | 0  | 0   | 0      | 1         | x            |
+| BGT Taken | 2   | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BGT not-Taken | 0 | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BLT Taken | 2   | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BLT not-Taken | 0 | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BEQ Taken | 2   | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BEQ not-Taken | 0 | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BNE Taken | 2   | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+| BNE not-Taken | 0 | x       | 1  | 0    | 1           | x       | 1      | 2     | 0     | 0  | x   | 1      | x         | x            |
+
+#### J-Type Instructions
+| OPCODE | PC src | Dst Reg | RB | En W | Write value | ALU src | ALU op | Mem R | Mem W | WB | ext | new sp | stack/mem | address/data |
+| ------ | ------ | ------- | -- | ---- | ----------- | ------- | ------ | ----- | ----- | -- | --- | ------ | --------- | ------------ |
+| JMP    | 1      | x       | x  | 0    | x           | x       | x      | 0     | x     | x  | 0   | x      | x         | x            |
+| CALL   | 1      | x       | x  | 0    | x           | x       | x      | 0     | x     | x  | x   | 2      | 1         | 1            |
+| RET    | 3      | x       | x  | 0    | x           | x       | x      | 1     | x     | 1  | x   | 1      | 1         | x            |
+
+
+#### S-Type Instructions
+
+| OPCODE  | PC src | Dst Reg | RB | En W | Write value | ALU src | ALU op | Mem R | Mem W | WB | ext | new sp | stack/mem | address/data |
+| ------- | ------ | ------- | -- | ---- | ----------- | ------- | ------ | ----- | ----- | -- | --- | ------ | --------- | ------------ |
+| PUSH.1  | 0      | x       | 1  | 0    | x           | x       | x      | 0     | x     | x  | x   | 2      | 1         | 0            |
+| POP.1   | 0      | 1       | x  | 1    | x           | x       | x      | 1     | x     | 1  | x   | 1      | 1         | x            |
+
 
 
 
