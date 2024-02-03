@@ -4,8 +4,8 @@ design and verify a simple multi cycle RISC processor in Verilog
 ## Partners
 
 
-👷‍♂️[Mohammed Abed Alkareem](https://github.com/Mohammed-Abed-Alkareem)
-👷‍♀️ Mona Dweikat
+👷‍♂️[Mohammed Abed Alkareem](https://github.com/Mohammed-Abed-Alkareem) <br>
+👷‍♀️ [Mona Dweikat](https://github.com/MonaDweikat)
 
 
 
