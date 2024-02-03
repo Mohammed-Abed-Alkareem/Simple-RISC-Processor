@@ -212,7 +212,8 @@ For simplicity, you are required to implement a subset only of this processor’
 - [register_file_tb.v](/verilog_files/src/Register/registerFile_tb.v)
   test bench for the register file module
 - waveform
-  ![register file waveform](/pictures/waves/registerFile_wave.png)
+  
+![register file waveform](/pictures/waves/registerFile_wave.png)
 
 ### Instruction memory
 
