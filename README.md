@@ -1,6 +1,12 @@
 # Simple-RISC-Processor
 design and verify a simple multi cycle RISC processor in Verilog
 
+## Partners
+
+```
+👷 Mohammed Abed Alkareem
+👷‍♀️ Mona Dweikat
+```
 
 
 ## Processor Specifications
