@@ -139,7 +139,7 @@ For simplicity, you are required to implement a subset only of this processor’
 ![Data Path](/pictures/datapath.png)
 
 ## Finite State Machine
-![Data Path](/pictures/State Diagram.png)
+![Data Path](/pictures/StateDiagram.png)
 
 | Signal Name    | Signal Description                                           | Cases                              |
 | --------------- | ------------------------------------------------------------ | ----------------------------------- |
