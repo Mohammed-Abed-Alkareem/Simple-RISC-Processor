@@ -140,7 +140,7 @@ For simplicity, you are required to implement a subset only of this processor’
 
 ## Finite State Machine
 ![Data Path](/pictures/StateDiagram.png)
-
+### Signals
 | Signal Name    | Signal Description                                           | Cases                              |
 | --------------- | ------------------------------------------------------------ | ----------------------------------- |
 | PC src          | Determines the next value of the PC                           | 0: Pc = Pc + 1<br/>1: PC = {PC[31:26], Immediate26 }<br/>2: PC = PC + sign_extended (Imm16)<br/>3: PC = top of the stack |
@@ -159,7 +159,7 @@ For simplicity, you are required to implement a subset only of this processor’
 | address/data    | Determines if the data stored in the memory from the registerfile or the pc+1 | 0: data from register file<br/>1: pc +1 |
 
 
-### Signals
+
 #### R-Type Instructions
 | OPCODE | PC src | Dst Reg | RB | En W | Write value | ALU src | ALU op | Mem R | Mem W | WB | ext | new sp | stack/mem | address/data |
 | ------ | ------ | ------- | -- | ---- | ----------- | ------- | ------ | ----- | ----- | -- | --- | ------ | --------- | ------------ |
