@@ -210,6 +210,27 @@ For simplicity, you are required to implement a subset only of this processor’
 
 ## Modules
 
+### PC Module
+
+- [pc_module.v](/verilog_files/src/Memory/Instruction%20Memory/PC/pcModule.v)
+  a 32 bit program counter logic module that handles Jump/Conditional Branches/Increment/Return
+
+- [pc_module_tb.v](/verilog_files/src/Memory/Instruction%20Memory/PC/pcModule_tb.v)
+  a test bench for the PC module that tests all operations
+
+- waveform
+  
+  ![pc module waveform](/pictures/waves/pcModule_wave.png)
+
+### Instruction memory
+
+- [instruction_memory.v](/verilog_files/src/Memory/Instruction%20Memory/instructionMemory.v)
+  a 32 bit instruction memory with 256 words
+- [instruction_memory_tb.v](/verilog_files/src/Memory/Instruction%20Memory/instructionMemoryTB.v)
+  test bench for the instruction memory module
+- waveform
+  
+  ![instruction memory waveform](/pictures/waves/instructionMemory_wave.png)
 
 ### Register file
 
@@ -221,29 +242,6 @@ For simplicity, you are required to implement a subset only of this processor’
   
 ![register file waveform](/pictures/waves/registerFile_wave.png)
 
-### Instruction memory
-
-- [instruction_memory.v](./processor_modules/RiscProcessor/processor/src/instruction_fetch/InstructionMemory.v)
-  a 32 bit instruction memory with 256 words
-- [instruction_memory_tb.v](.processor_modules/RiscProcessor/processor/src/instruction_fetch/instruction_memory_testbench.v)
-  test bench for the instruction memory module
-- waveform
-  
-  ![instruction memory waveform](./assets/instruction_memory_waveform.png)
-
-### Data memory
-
-- [data_memory.v](verilog_files/src/Memory/Data%20Memory/dataMemory.v)
-  a 32 bit data memory with 256 words (last 32 word are used as stack)
-
-- [data_memory_tb.v](/verilog_files/src/Memory/Data Memory/dataMemory_tb.v)
-  test bench for the data memory module
-
-- waveform
-  
-  ![data memory waveform](/pictures/waves/dataMemory_wave.png)
-![data memory stack waveform](/pictures/waves/dataMemoryStack_wave.png)
-
 ### ALU
 
 - [alu.v](/verilog_files/src/ALU/ALU.v)
@@ -253,38 +251,44 @@ For simplicity, you are required to implement a subset only of this processor’
   a test bench for the ALU module that tests all operations and the flags
 
 - waveform
+  
   ![alu waveform](/pictures/waves/ALU_wave.png)
 
-### PC Module
 
-- [pc_module.v](/verilog_files/src/Memory/Instruction Memory/PC/pcModule.v)
-  a 32 bit program counter logic module that handles Jump/Conditional Branches/Increment/Return
-
-- [pc_module_tb.v](/verilog_files/src/Memory/Instruction Memory/PC/pcModule_tb.v)
-  a test bench for the PC module that tests all operations
-
-- waveform
-  
-  ![pc module waveform](/pictures/waves/pcModule_wave.png)
 
 ### Stack Pointer Module
 
-- [stack.v](/verilog_files/src/Memory/Data Memory/Stack Pointer/StackPointer.v)
+- [stack.v](/verilog_files/src/Memory/Data%20Memory/Stack%20Pointer/StackPointer.v)
   a 32 bit stack Pointer module that aves the address of top of the stack
 
-- [stack_testbench.v](/verilog_files/src/Memory/Data Memory/Stack Pointer/StackPointer_tb.v)
+- [stack_testbench.v](/verilog_files/src/Memory/Data%20Memory/Stack%20Pointer/StackPointer_tb.v)
   a test bench for the stack module that tests all operations
 
 - waveform
   
   ![stack waveform](/pictures/waves/StackPointer_wave.png)
 
-## Control Unit ( FSM )
+### Data memory
 
-- [control_unit.v](/verilog_files/src/Control Unit/ControlUnit.v)
+- [data_memory.v](verilog_files/src/Memory/Data%20Memory/dataMemory.v)
+  a 32 bit data memory with 256 words (last 32 word are used as stack)
+
+- [data_memory_tb.v](/verilog_files/src/Memory/Data%20Memory/dataMemory_tb.v)
+  test bench for the data memory module
+
+- waveform
+  
+  ![data memory waveform](/pictures/waves/dataMemory_wave.png)
+![data memory stack waveform](/pictures/waves/dataMemoryStack_wave.png)
+
+
+
+## Control Unit
+
+- [control_unit.v](/verilog_files/src/Control%20Unit/ControlUnit.v)
   a control unit that handles the control signals for the processor
 
-- [control_unit_tb.v](/verilog_files/src/Control Unit/controlUnitTB.v)
+- [control_unit_tb.v](/verilog_files/src/Control%20Unit/controlUnitTB.v)
   a test bench for the control unit that tests all operations
 
 -  Waveform
