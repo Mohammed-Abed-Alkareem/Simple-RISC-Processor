@@ -228,65 +228,70 @@ For simplicity, you are required to implement a subset only of this processor’
 - [instruction_memory_tb.v](.processor_modules/RiscProcessor/processor/src/instruction_fetch/instruction_memory_testbench.v)
   test bench for the instruction memory module
 - waveform
+  
   ![instruction memory waveform](./assets/instruction_memory_waveform.png)
 
 ### Data memory
 
-- [data_memory.v](./processor_modules/RiscProcessor/processor/src/data_memory/data_memory.v)
+- [data_memory.v](/verilog_files/src/Memory/Data Memory/dataMemory.v)
+  
   a 32 bit data memory with 256 words (last 32 word are used as stack)
 
-- [data_memory_tb.v](./processor_modules/RiscProcessor/processor/src/data_memory/data_memory_testbench.v)
+- [data_memory_tb.v](/verilog_files/src/Memory/Data Memory/dataMemory_tb.v)
   test bench for the data memory module
 
 - waveform
-  ![data memory waveform](./assets/data_memory_waveform.png)
-![data memory stack waveform](./assets/data_memory_waveform.png)
+  
+  ![data memory waveform](/pictures/waves/dataMemory_wave.png)
+![data memory stack waveform](/pictures/waves/dataMemoryStack_wave.png)
 
 ### ALU
 
-- [alu.v](./processor_modules/RiscProcessor/processor/src/alu/alu.v)
-  a 32 bit ALU with 5 operations ( ADD, SUB, AND, SL, SR ) and 2 flags ( zero, negative )
+- [alu.v](/verilog_files/src/ALU/ALU.v)
+  a 32 bit ALU with 3 operations ( ADD, SUB, AND) and 2 flags ( zero, negative )
 
-- [alu_tb.v](./processor_modules/RiscProcessor/processor/src/alu/alu_testbench.v)
+- [alu_tb.v](/verilog_files/src/ALU/ALU_tb.v)
   a test bench for the ALU module that tests all operations and the flags
 
 - waveform
-  ![alu waveform](./assets/alu_tb_waveform.png)
+  ![alu waveform](/pictures/waves/ALU_wave.png)
 
 ### PC Module
 
-- [pc_module.v](./processor_modules/RiscProcessor/processor/src/instruction_fetch/pc_module.v)
+- [pc_module.v](/verilog_files/src/Memory/Instruction Memory/PC/pcModule.v)
   a 32 bit program counter logic module that handles Jump/Conditional Branches/Increment/Return
 
-- [pc_module_tb.v](./processor_modules/RiscProcessor/processor/src/instruction_fetch/pc_module_testbench.v)
+- [pc_module_tb.v](/verilog_files/src/Memory/Instruction Memory/PC/pcModule_tb.v)
   a test bench for the PC module that tests all operations
 
 - waveform
-  ![pc module waveform](./assets/pc_module_tb_waveform.png)
+  
+  ![pc module waveform](/pictures/waves/pcModule_wave.png)
 
-### Stack Module ( LIFO Memory )
+### Stack Pointer Module
 
-- [stack.v](./processor_modules/RiscProcessor/processor/src/stack/stack.v)
-  a 32 bit stack module that handles push/pop operations on Last-In-First-Out memory and has a 32 word capacity
+- [stack.v](/verilog_files/src/Memory/Data Memory/Stack Pointer/StackPointer.v)
+  a 32 bit stack Pointer module that aves the address of top of the stack
 
-- [stack_testbench.v](./processor_modules/RiscProcessor/processor/src/stack/stack_testbench.v)
+- [stack_testbench.v](/verilog_files/src/Memory/Data Memory/Stack Pointer/StackPointer_tb.v)
   a test bench for the stack module that tests all operations
 
 - waveform
-  ![stack waveform](./assets/stack_testbench.png)
+  
+  ![stack waveform](/pictures/waves/StackPointer_wave.png)
 
 ## Control Unit ( FSM )
 
-- [control_unit.v](./processor_modules/RiscProcessor/processor/src/control_unit/control_unit.v)
+- [control_unit.v](/verilog_files/src/Control Unit/ControlUnit.v)
   a control unit that handles the control signals for the processor
 
-- [control_unit_tb.v](./processor_modules/RiscProcessor/processor/src/control_unit/control_unit_testbench.v)
+- [control_unit_tb.v](/verilog_files/src/Control Unit/controlUnitTB.v)
   a test bench for the control unit that tests all operations
 
-- R/I Type Arithmatic/Logical Operations Waveform
-  ![control unit waveform](./assets/control_unit/arithmatic_logical_waveform.png)
-- Jump/Branch Operations Waveform
-  ![control unit waveform](./assets/control_unit/jump_branch_waveform.png)
+-  Waveform
+
+  ![control unit waveform](/pictures/waves/ControlUnit_wave.png)
+
 
 
 # To be Added ....
