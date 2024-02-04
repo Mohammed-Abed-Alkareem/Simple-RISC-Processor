@@ -145,6 +145,8 @@ For simplicity, you are required to implement a subset only of this processor’
 ![Data Path](/pictures/datapath.png)
 
 ## Finite State Machine
+The state diagram represents how each instruction flows through the different processing stages, and is used in the implementation of the control unit module. Each instruction must go through its processing stages to be fully handled. The below state diagram shows the flow of each instruction and which stages each instruction needs to go through to be fully processed and correctly handled. The state diagram includes all five processing stages, instruction fetch, decode, execute, memory, and write back.
+
 ![Data Path](/pictures/StateDiagram.png)
 ### Signals
 | Signal Name    | Signal Description                                           | Cases                              |
@@ -297,4 +299,15 @@ For simplicity, you are required to implement a subset only of this processor’
 
 
 
-# To be Added ....
+## Processor
+The Processor is used to connect and drive all the different stages and modules to perform the given subset of operations. The processor is built, and wired based on the designed datapath. The wiring of the processor heavily depends on the datapath designed for the instruction subset.
+Test instruction values were set in the instruction memory to ensure the correct operation of the processor.
+Test instructions:
+```
+        memory[0] = {ADDI, R1, R2, 16'd10, 2'b00};   // R1 = R2 + 10 = 10
+		memory[1] = {ADDI, R2, R3, 16'd20, 2'b00};   // R2 = R3 + 20 = 20
+		memory[2] = {AND, R3, R1, R2, 14'b00};       // R3 = R1 & R2 = 0
+		memory[3] = {ADD, R4, R1, R2, 14'b00};       // R4 = R1 + R2 = 30
+		memory[4] = {SUB, R3, R2, R1, 14'b00};       // R3 = R2 - R1 = 10
+```
+![R-type waveform](/pictures/waves/R_type_wave.png)
