@@ -233,8 +233,7 @@ For simplicity, you are required to implement a subset only of this processor’
 
 ### Data memory
 
-- [data_memory.v](/verilog_files/src/Memory/Data Memory/dataMemory.v)
-  
+- [data_memory.v](verilog_files/src/Memory/Data%20Memory/dataMemory.v)
   a 32 bit data memory with 256 words (last 32 word are used as stack)
 
 - [data_memory_tb.v](/verilog_files/src/Memory/Data Memory/dataMemory_tb.v)
