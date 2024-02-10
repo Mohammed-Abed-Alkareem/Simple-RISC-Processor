@@ -304,10 +304,10 @@ The Processor is used to connect and drive all the different stages and modules 
 Test instruction values were set in the instruction memory to ensure the correct operation of the processor.
 Test instructions:
 ```
-		memory[0] = {ADDI, R1, R2, 16'd10, 2'b00};   // R1 = R2 + 10 = 10
-		memory[1] = {ADDI, R2, R3, 16'd20, 2'b00};   // R2 = R3 + 20 = 20
-		memory[2] = {AND, R3, R1, R2, 14'b00};       // R3 = R1 & R2 = 0
-		memory[3] = {ADD, R4, R1, R2, 14'b00};       // R4 = R1 + R2 = 30
-		memory[4] = {SUB, R3, R2, R1, 14'b00};       // R3 = R2 - R1 = 10
+memory[0] = {ADDI, R1, R2, 16'd10, 2'b00};   // R1 = R2 + 10 = 10
+memory[1] = {ADDI, R2, R3, 16'd20, 2'b00};   // R2 = R3 + 20 = 20
+memory[2] = {AND, R3, R1, R2, 14'b00};       // R3 = R1 & R2 = 0
+memory[3] = {ADD, R4, R1, R2, 14'b00};       // R4 = R1 + R2 = 30
+memory[4] = {SUB, R3, R2, R1, 14'b00};       // R3 = R2 - R1 = 10
 ```
 ![R-type waveform](/pictures/waves/R_type_wave.png)
