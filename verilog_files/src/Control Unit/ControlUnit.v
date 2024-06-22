@@ -77,6 +77,7 @@ module controlUnit(
 
             `STG_INIT: begin                                    
                 enIF = LOW;
+                 sigPCSrc = pcDefault; // Set PC source to default during INIT
                 nextStage <= `STG_FTCH;
             end
 
@@ -99,25 +100,6 @@ module controlUnit(
                 // Determine next stage
                 nextStage <= `STG_DCDE;
 
-                // Determine next PC through testing of opcodes
-                if (instructionCode == BGT && negativeFlag || instructionCode == BLT && ~negativeFlag || instructionCode == BEQ && zeroFlag || instructionCode == BNE && ~zeroFlag) begin
-
-                    sigPCSrc = pcSgnImm;
-
-                end else if (instructionCode == JMP || instructionCode == CALL) begin
-
-                    sigPCSrc = pcImm;
-
-                end else if (instructionCode == RET) begin
-
-                    sigPCSrc = pcStack;
-
-                end else begin
-
-                    sigPCSrc = pcDefault;
-
-                end	 
-            
             end
 
             `STG_DCDE: begin 
@@ -145,6 +127,24 @@ module controlUnit(
 				sigExt = (instructionCode == ANDI)	? LOW : HIGH;
 				sigALUSrc = (instructionCode == ANDI || instructionCode == ADDI || instructionCode == LW || instructionCode == LWPOI || instructionCode == SW) ? LOW : HIGH;
 				sigWriteVal = (instructionCode == LWPOI && enID) ? LOW : HIGH;
+
+
+
+        // Determine PC source for next instruction only if the next stage is `STG_FTCH`
+                if (nextStage == `STG_FTCH) begin
+                    if (instructionCode == BGT && negativeFlag || instructionCode == BLT && ~negativeFlag || instructionCode == BEQ && zeroFlag || instructionCode == BNE && ~zeroFlag) begin
+                        sigPCSrc = pcSgnImm;
+                    end else if (instructionCode == JMP || instructionCode == CALL) begin
+                        sigPCSrc = pcImm;
+                    end else if (instructionCode == RET) begin
+                        sigPCSrc = pcStack;
+                    end else begin
+                        sigPCSrc = pcDefault;
+                    end
+                end
+
+
+
             end
 
             `STG_EXEC: begin 
@@ -185,6 +185,23 @@ module controlUnit(
 
                 end	
 				sigENW = LOW;
+
+
+// Determine PC source for next instruction only if the next stage is `STG_FTCH`
+                if (nextStage == `STG_FTCH) begin
+                    if (instructionCode == BGT && negativeFlag || instructionCode == BLT && ~negativeFlag || instructionCode == BEQ && zeroFlag || instructionCode == BNE && ~zeroFlag) begin
+                        sigPCSrc = pcSgnImm;
+                    end else if (instructionCode == JMP || instructionCode == CALL) begin
+                        sigPCSrc = pcImm;
+                    end else if (instructionCode == RET) begin
+                        sigPCSrc = pcStack;
+                    end else begin
+                        sigPCSrc = pcDefault;
+                    end
+                end
+
+
+
             end
 
             `STG_MEM: begin 
@@ -222,7 +239,21 @@ module controlUnit(
                     sigNewSP = stackPointerDef;
 
                 end
-					
+
+
+// Determine PC source for next instruction only if the next stage is `STG_FTCH`
+                if (nextStage == `STG_FTCH) begin
+                    if (instructionCode == BGT && negativeFlag || instructionCode == BLT && ~negativeFlag || instructionCode == BEQ && zeroFlag || instructionCode == BNE && ~zeroFlag) begin
+                        sigPCSrc = pcSgnImm;
+                    end else if (instructionCode == JMP || instructionCode == CALL) begin
+                        sigPCSrc = pcImm;
+                    end else if (instructionCode == RET) begin
+                        sigPCSrc = pcStack;
+                    end else begin
+                        sigPCSrc = pcDefault;
+                    end
+                end
+
             end
 
             `STG_WRB: begin 
@@ -249,6 +280,22 @@ module controlUnit(
                 // Set to 1 for all instructions
 				sigDstReg = HIGH;	
 				sigWriteVal = HIGH;
+
+
+// Determine PC source for next instruction only if the next stage is `STG_FTCH`
+                if (nextStage == `STG_FTCH) begin
+                    if (instructionCode == BGT && negativeFlag || instructionCode == BLT && ~negativeFlag || instructionCode == BEQ && zeroFlag || instructionCode == BNE && ~zeroFlag) begin
+                        sigPCSrc = pcSgnImm;
+                    end else if (instructionCode == JMP || instructionCode == CALL) begin
+                        sigPCSrc = pcImm;
+                    end else if (instructionCode == RET) begin
+                        sigPCSrc = pcStack;
+                    end else begin
+                        sigPCSrc = pcDefault;
+                    end
+                end
+
+
             end						  
 
         endcase
